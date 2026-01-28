@@ -6,11 +6,11 @@
     "paths": {
       "@/*": ["./*"],
       "@app/*": ["src/app/*"],
-      "@pages/*": ["src/app/pages/*"],
-      "@features/*": ["src/app/features/*"],
-      "@entities/*": ["src/app/entities/*"],
-      "@shared/*": ["src/app/shared/*"],
-      "@widgets/*": ["src/app/widgets/*"]
+      "@pages/*": ["src/pages/*"],
+      "@features/*": ["src/features/*"],
+      "@entities/*": ["src/entities/*"],
+      "@shared/*": ["src/shared/*"],
+      "@widgets/*": ["src/widgets/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
