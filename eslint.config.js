@@ -1,13 +1,11 @@
 // https://docs.expo.dev/guides/using-eslint/
+const { defineConfig } = require('eslint/config')
 const conartiFSD = require('@conarti/eslint-plugin-feature-sliced')
-const { defineConfig } = require('eslint/config');
-const expoConfig = require('eslint-config-expo/flat');
+const expoConfig = require('eslint-config-expo/flat')
 
 module.exports = defineConfig([
   expoConfig,
-  {
-    ignores: ['dist/*'],
-  },
+  { ignores: ['dist/*'] },
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     plugins: {
@@ -18,6 +16,13 @@ module.exports = defineConfig([
       '@conarti/feature-sliced/layers-slices': 'error',
       '@conarti/feature-sliced/absolute-relative': 'error',
       '@conarti/feature-sliced/public-api': 'error',
+    },
+  },
+  // override for app-layer
+  {
+    files: ['src/app/**/*.{ts,tsx}'],
+    rules: {
+      '@conarti/feature-sliced/public-api': 'off',
     },
   },
 ])
