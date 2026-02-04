@@ -1,9 +1,9 @@
-import { AIcon } from "@shared/types"
+import { AIconT } from "@shared/ui/a-icon"
 
-export type ACategory = {
+export type ACategoryT = {
   id: string
   name: string
-  icon: AIcon
+  icon: AIconT
   amount: number
   progress: number
 }

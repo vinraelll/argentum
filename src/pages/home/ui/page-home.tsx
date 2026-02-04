@@ -1,8 +1,7 @@
-import { ACategory } from "@entities/a-category"
-import { ATransaction } from "@entities/a-transaction"
 import { Dashboard } from "@widgets/dashboard"
-import { FlatList, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
+import Categories from "./categories"
+import Transactions from "./transactions"
 
 export default function HomePage() {
   const transactions = [
@@ -24,29 +23,17 @@ export default function HomePage() {
     { id: "4", name: "Rent", icon: "home" as const, amount: 500.0, progress: 100 },
   ]
 
+  const balance = {
+    totalBalance: "12,345.67",
+    expenses: "2,423.46",
+    incomes: "4,769.13",
+  }
+
   return (
     <SafeAreaView className="flex-1 p-6 pt-0">
-      <Dashboard />
-
-      {/* Categories */}
-      <View className="mt-6">
-        <View className="flex-row justify-between items-center mb-4">
-          <Text className="text-lg font-bold">Spending by Category</Text>
-          <Text className="text-sm font-medium text-primary">See All</Text>
-        </View>
-
-        <FlatList data={categories} renderItem={({ item }) => <ACategory category={item} />} />
-      </View>
-
-      {/* Transactions */}
-      <View className="mt-6">
-        <View className="flex-row justify-between items-center mb-4">
-          <Text className="text-lg font-bold">Recent Transactions</Text>
-          <Text className="text-sm font-medium text-primary">See All</Text>
-        </View>
-
-        <FlatList data={transactions} renderItem={({ item }) => <ATransaction transaction={item} />} />
-      </View>
+      <Dashboard {...balance} />
+      <Categories categories={categories} />
+      <Transactions transactions={transactions} />
     </SafeAreaView>
   )
 }
