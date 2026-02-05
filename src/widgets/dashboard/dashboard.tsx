@@ -1,14 +1,9 @@
 import { AIcon } from "@/src/shared/ui/a-icon"
 import { formatCurrency } from "@shared/lib/helpers/currency"
 import { Text, View } from "react-native"
+import { DashboardT } from "./types"
 
-type Props = {
-  totalBalance: string
-  expenses: string
-  incomes: string
-}
-
-export default function Dashboard({ totalBalance, expenses, incomes }: Props) {
+export default function Dashboard({ totalBalance, expenses, incomes }: DashboardT) {
   const formatted = {
     totalBalance: formatCurrency(totalBalance),
     expenses: formatCurrency(expenses),

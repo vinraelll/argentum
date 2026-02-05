@@ -1,12 +1,5 @@
-import { Text, View } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
+import { TransactionsPage } from "@pages/transactions";
 
 export default function Transactions() {
-  return (
-    <SafeAreaView>
-      <View>
-        <Text className="text-text-primary">Transactions Page</Text>
-      </View>
-    </SafeAreaView>
-  )
+  return <TransactionsPage />
 }

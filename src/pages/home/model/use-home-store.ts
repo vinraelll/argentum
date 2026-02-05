@@ -1,15 +1,12 @@
 import { ACategoryT } from "@/src/entities/a-category"
 import { ATransactionT } from "@/src/entities/a-transaction"
+import { DashboardT } from "@widgets/dashboard"
 import { create } from "zustand"
 
 type HomeStore = {
   transactions: ATransactionT[]
   categories: ACategoryT[]
-  balance: {
-    totalBalance: number
-    expenses: number
-    incomes: number
-  }
+  balance: DashboardT
 }
 
 export const useHomeStore = create(
