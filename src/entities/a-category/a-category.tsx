@@ -1,13 +1,14 @@
 import { AIcon } from "@/src/shared/ui/a-icon"
+import { formatCurrency } from "@shared/lib/helpers/currency"
 import { Text, View } from "react-native"
-import { ACategoryT } from "../types"
+import { ACategoryT } from "./types"
 
 type Props = {
   category: ACategoryT
 }
 
 export default function ACategory({ category }: Props) {
-  const amount = `$${category.amount.toFixed(2)}`
+  const amount = formatCurrency(category.amount)
 
   return (
     <View className="mb-4">

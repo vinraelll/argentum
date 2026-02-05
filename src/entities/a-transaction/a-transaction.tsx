@@ -1,17 +1,15 @@
 import { AIcon } from "@/src/shared/ui/a-icon"
+import { formatCurrency } from "@shared/lib/helpers/currency"
 import { Text, View } from "react-native"
-import { ATransactionT as ATransactionType } from "../types"
+import { ATransactionT } from "./types"
 
 type Props = {
-  transaction: ATransactionType
+  transaction: ATransactionT
 }
 
 export default function ATransaction({ transaction }: Props) {
-  const isPositive = transaction.amount > 0
   const amountColor = transaction.amount < 0 ? "color-danger" : "color-success"
-  const amountValue = isPositive
-    ? `+$${transaction.amount.toFixed(2)}`
-    : `-$${Math.abs(transaction.amount).toFixed(2)}`
+  const amountValue = formatCurrency(transaction.amount)
 
   return (
     <View className="flex-row items-center justify-between mb-4">

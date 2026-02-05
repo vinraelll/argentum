@@ -1,2 +1,2 @@
+export { default as ATransaction } from "./a-transaction"
 export type { ATransactionT } from "./types"
-export { default as ATransaction } from "./ui/a-transaction"
