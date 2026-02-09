@@ -1,5 +1,5 @@
-import { AIcon } from "@/src/shared/ui/a-icon"
 import { formatCurrency } from "@shared/lib/helpers/currency"
+import { AIcon } from "@shared/ui/a-icon"
 import { Text, View } from "react-native"
 import { ATransactionT } from "./types"
 

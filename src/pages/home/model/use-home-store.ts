@@ -1,5 +1,5 @@
-import { ACategoryT } from "@/src/entities/a-category"
-import { ATransactionT } from "@/src/entities/a-transaction"
+import { ACategoryT } from "@entities/a-category"
+import { ATransactionT } from "@entities/a-transaction"
 import { DashboardT } from "@widgets/dashboard"
 import { create } from "zustand"
 

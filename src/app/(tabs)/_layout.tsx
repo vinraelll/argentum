@@ -1,5 +1,8 @@
+import { BottomTabBarButtonProps } from "@react-navigation/bottom-tabs"
+import { PlatformPressable } from "@react-navigation/elements"
 import { darkColors, lightColors } from "@shared/lib/theme"
 import { AIcon } from "@shared/ui/a-icon"
+import * as Haptics from "expo-haptics"
 import { Tabs } from "expo-router"
 import { useColorScheme } from "nativewind"
 
@@ -18,6 +21,15 @@ export default function TabLayout() {
           backgroundColor: `rgb(${colors["--color-bg"]})`,
           borderTopColor: `rgb(${colors["--color-border"]})`,
         },
+        tabBarButton: (props: BottomTabBarButtonProps) => (
+          <PlatformPressable
+            {...props}
+            onPressIn={(ev) => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+              props.onPressIn?.(ev)
+            }}
+          />
+        ),
         headerShown: false,
       }}
     >
