@@ -1,23 +1,13 @@
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet"
-import { darkColors, lightColors } from "@shared/lib/theme"
+import { useAuth } from "@entities/session"
 import { ACard } from "@shared/ui/a-card"
 import { AIcon } from "@shared/ui/a-icon"
 import { AScreen } from "@shared/ui/a-screen"
-import { useColorScheme } from "nativewind"
-import React, { useMemo, useRef } from "react"
-import { Button, Pressable, Text, View } from "react-native"
-import { GestureHandlerRootView } from "react-native-gesture-handler"
+import React from "react"
+import { Pressable, Text, View } from "react-native"
 import { SettingsMain, SettingsSupport } from "./"
 
 export default function SettingsPage() {
-  const { colorScheme } = useColorScheme()
-  const colors = colorScheme === "dark" ? darkColors : lightColors
-
-  const bottomSheetRef = useRef<BottomSheet>(null)
-  const snapPoints = useMemo(() => ["100%"], [])
-
-  const handleOpenPress = () => bottomSheetRef.current?.expand()
-  const handleClosePress = () => bottomSheetRef.current?.close()
+  const { signOut } = useAuth()
 
   return (
     <>
@@ -49,32 +39,13 @@ export default function SettingsPage() {
         <SettingsMain />
         <SettingsSupport />
 
-        <Pressable onPress={handleOpenPress}>
+        <Pressable onPress={signOut}>
           <ACard className="mt-6 flex-row items-center gap-2 justify-center p-3">
             <AIcon name="log-out-outline" size={20} className="color-danger" />
             <Text className="color-danger">Logout</Text>
           </ACard>
         </Pressable>
       </AScreen>
-
-      <GestureHandlerRootView>
-        <BottomSheet
-          ref={bottomSheetRef}
-          index={-1} // -1 значит изначально закрыт
-          snapPoints={snapPoints}
-          enablePanDownToClose
-          backgroundStyle={{
-            backgroundColor: `rgb(${colors["--color-bg"]})`,
-          }}
-          handleIndicatorStyle={{ backgroundColor: `rgb(${colors["--color-border"]})` }}
-        >
-          <BottomSheetView className="p-4 items-center">
-            <Text className="text-lg font-bold text-text-primary">Привет! 👋</Text>
-            <Text className="text-text-secondary mt-2">Я Bottom Sheet</Text>
-            <Button title="Закрыть" onPress={handleClosePress} />
-          </BottomSheetView>
-        </BottomSheet>
-      </GestureHandlerRootView>
     </>
   )
 }
