@@ -1,53 +1,61 @@
 import { ACard } from "@shared/ui/a-card"
-import { ADivider } from "@shared/ui/a-divider"
-import { AIcon } from "@shared/ui/a-icon"
-import React from "react"
+import { useColorScheme } from "nativewind"
+import React, { useState } from "react"
 import { Text, View } from "react-native"
+import { SettingT } from "../types"
+import SettingItem from "./setting-item"
 
 export default function SettingsMain() {
-  const mainSettings = [
+  const [openPicker, setOpenPicker] = useState<string | null>(null)
+  const [currency, setCurrency] = useState("USD")
+  const { colorScheme, setColorScheme } = useColorScheme()
+
+  const mainSettings: SettingT[] = [
     {
-      icon: "logo-usd" as const,
+      id: "currency",
+      icon: "logo-usd",
       title: "Currency",
-      value: "USD ($)",
+      value: currency,
+      picker: {
+        selectedValue: currency,
+        onValueChange: (val: string) => setCurrency(val),
+        items: [
+          { label: "USD ($)", value: "USD" },
+          { label: "EUR (€)", value: "EUR" },
+          { label: "RSD (RSD)", value: "RSD" },
+        ],
+      },
     },
     {
-      icon: "moon" as const,
+      id: "theme",
+      icon: "moon",
       title: "Theme",
-      value: "Dark",
+      value: colorScheme === "dark" ? "Dark" : "Light",
+      picker: {
+        selectedValue: colorScheme,
+        onValueChange: (val: string) => setColorScheme(val as "light" | "dark"),
+        items: [
+          { label: "Light", value: "light" },
+          { label: "Dark", value: "dark" },
+          { label: "System", value: "system" },
+        ],
+      },
     },
-    {
-      icon: "notifications" as const,
-      title: "Notifications",
-      value: "Enabled",
-    },
-    {
-      icon: "language" as const,
-      title: "Language",
-      value: "English (EN)",
-    },
+    { id: "notifications", icon: "notifications", title: "Notifications", value: "Enabled" },
   ]
+
   return (
     <View>
       <Text className="text-sm font-bold text-text-primary my-2">Main</Text>
-      <ACard className="flex-col gap-2">
+      <ACard className="flex-col">
         {mainSettings.map((setting, index) => (
-          <React.Fragment key={index}>
-            <View className="flex-row items-center justify-between">
-              <View className="flex-row items-center gap-2">
-                <View className="flex items-center justify-center p-2 border border-border rounded-sm">
-                  <AIcon name={setting.icon} size={20} className="text-text-primary" />
-                </View>
-                <Text className="text-text-primary">{setting.title}</Text>
-              </View>
-              <View className="flex-row items-center gap-2">
-                <Text className="text-text-secondary">{setting.value}</Text>
-                <AIcon name="chevron-forward-outline" size={20} className="text-text-primary" />
-              </View>
-            </View>
-
-            {index !== mainSettings.length - 1 && <ADivider />}
-          </React.Fragment>
+          <SettingItem
+            key={setting.id}
+            setting={setting}
+            isExpanded={openPicker === setting.id}
+            onPress={() => setting.picker && setOpenPicker(openPicker === setting.id ? null : setting.id)}
+            showDivider={index !== mainSettings.length - 1}
+          />
         ))}
       </ACard>
     </View>
